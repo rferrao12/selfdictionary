@@ -81,12 +81,15 @@ def index():
 def get_w():
     return jsonify({'minidictionary':mdt})
 
-
-
 @app.route('/mdt/<string:word_n>', methods=['GET'])
 def mean(word_n):
     wd = [wd for wd in mdt if wd['Word'] == word_n]
     return jsonify({'Searched Word': wd[0]})
+
+@app.route('/mdt/sort',methods=['GET'])
+def srt():
+    s=sorted(mdt, key = lambda i: (i['Word']))
+    return jsonify({'Sorted':s})
 
 @app.route('/mdt', methods=['POST'])
 def create_w():
